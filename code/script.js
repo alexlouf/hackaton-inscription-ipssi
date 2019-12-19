@@ -12,6 +12,7 @@ window.addEventListener("DOMContentLoaded", ()=>{
         e.preventDefault();
         valid = true;
         message = "Vérifier votre ";
+        json = {};
 
         for(var i = 0; i < form.length-1; i++){
             if (form[i].name == "email") {
@@ -29,6 +30,8 @@ window.addEventListener("DOMContentLoaded", ()=>{
                     break;
                 }
             }
+            form[i].classList.remove("is-invalid");
+            json[form[i].name] = form[i].value;
         }
 
         if (!valid) {
@@ -36,8 +39,25 @@ window.addEventListener("DOMContentLoaded", ()=>{
             return;
         }
 
-        fetchArray(array);
+        var data = JSON.stringify(json);
 
+        var xhr = new XMLHttpRequest();
+        xhr.withCredentials = true;
+
+        xhr.addEventListener("readystatechange", function() {
+        if(this.readyState === 4) {
+            if(!this.responseText.success) {
+                alert("Erreur dans la BDD, veuillez recommencer plus tard !")
+            }
+        }
+        });
+
+        xhr.open("POST", "local-api.php");
+        xhr.setRequestHeader("Content-Type", "application/json");
+
+        xhr.send(data);
+
+        fetchArray(array);
         return;
     }
 
@@ -71,7 +91,6 @@ function controlText(text) {
 }
 
 function fetchArray(array) {
-    console.log(array)
 
     var xhr = new XMLHttpRequest();
     xhr.withCredentials = true;
@@ -104,11 +123,11 @@ function editArray(data, array){
         thSpeciality = document.createElement("td");
 
         //Add values to dom elements
-        thName.innerHTML = json[0].name;
-        thSurname.innerHTML = json[0].surname;
-        thEmail.innerHTML = json[0].email;
-        thPromotion.innerHTML = json[0].promotion;
-        thSpeciality.innerHTML = json[0].speciality
+        thName.innerHTML = json[i].name;
+        thSurname.innerHTML = json[i].surname;
+        thEmail.innerHTML = json[i].email;
+        thPromotion.innerHTML = json[i].promotion;
+        thSpeciality.innerHTML = json[i].speciality
 
         //adding to HTML
         tr.appendChild(thName);
