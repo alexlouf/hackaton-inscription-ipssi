@@ -93,12 +93,6 @@ function editArray(data, array){
     json = JSON.parse(data);
     tbody = array.children[1];
     tbody.innerHTML = "";
-    //tr = document.createElement("tr");
-    //thName = document.createElement("td");
-    //thSurname = document.createElement("td");
-    //thEmail = document.createElement("td");
-    //thPromotion = document.createElement("td");
-    //thSpeciality = document.createElement("td");
 
     for (var i = 0; i < json.length; i++) {
         //creating dom elements
