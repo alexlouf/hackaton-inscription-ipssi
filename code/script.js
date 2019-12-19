@@ -50,15 +50,15 @@ window.addEventListener("DOMContentLoaded", ()=>{
 });
 
 function controlEmail(email) {
-    // Ajouter controle email
-    // required
-    // regex pour controler @ nom de domaines . indicatid pays ---- ça se trouve sur google
-    // pas de balise HTML du genre <script> pour eviter le XSS 
-    // pas de caractère spéciaux pour eviter le 'OR 1=1#
-    // return true ou flase si c'est bon ou pas
+    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    var email_valid = re.test(email);
 
-    return true;
-}
+    if (email_valid) {
+        return true; 
+    } else {
+        return false; 
+    }
+};
 
 function controlText(text) {
     // Ajouter controle texte
