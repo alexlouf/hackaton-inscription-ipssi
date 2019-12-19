@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 }
 
 function adduser() {
-
+    echo json_encode($_POST);
 }
 
 function displayusers($conn) {
