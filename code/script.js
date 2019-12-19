@@ -61,14 +61,13 @@ function controlEmail(email) {
 };
 
 function controlText(text) {
-    // Ajouter controle texte
-    // Required & minimum 2 caractères
-    // pas de balise HTML du genre <script> pour eviter le XSS 
-    // pas de caractère spéciaux pour eviter le 'OR 1=1#
-    // return true ou flase si c'est bon ou pas
-
-    return true;
+    re = /[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/;
+    if(text.length < 2 || text.length > 25 ||  re.test(text)){
+        return false
+    }
+        return true;
 }
+
 
 function fetchArray(array) {
     console.log(array)
@@ -122,63 +121,3 @@ function editArray(data, array){
 }
 
 
-
-function surligne(field, error){
-    if(error)
-    field.style.backgroundColor = "#fba";
-    else
-    field.style.backgroundColor = "";
-}
-
-function verifSurname(field){
-   if(field.value.length < 2 || field.value.length > 25)
-   {
-      surligne(field, true);
-      return false;
-   }
-   else
-   {
-      surligne(field, false);
-      return true;
-   }
-}
-
-function verifName(field){
-    if(field.value.length < 2 || field.value.length > 25)
-    {
-       surligne(field, true);
-       return false;
-    }
-    else
-    {
-       surligne(field, false);
-       return true;
-    }
- }
-
- function verifMail(field)
-{
-   var regex = /^[a-zA-Z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/;
-   if(!regex.test(champ.value))
-   {
-      surligne(champ, true);
-      return false;
-   }
-   else
-   {
-      surligne(champ, false);
-      return true;
-   }
-}
-
-function verifPromoSpe(field){
-    var regex = /^[a-zA-Z0-9._-]$/;
-    if(!regex.test(field.value)){
-        surligne(field, true);
-        return false;
-    }else{
-        surligne(field, false);
-        return true;
-    } 
-        
-}
