@@ -10,8 +10,43 @@
 
     <title>Inscription !</title>
   </head>
-  <body>
+  <body class="d-flex align-items-center justify-content-center" style="height: -webkit-fill-available; background-image: url(./img/hackathon.jpg); background-size: cover;">
 
+        <div class="container rounded-lg bg-light p-3 pl-4" style="box-shadow: 0px 0px 40px 30px rgba(0,0,0,0.74);">
+            <h1 class="h3">Inscription au hackathon IPSSI</h1>
+            <form class="mt-4">
+                <div class="row">
+                  <div class="col form-group">
+                    <input type="text" class="form-control" placeholder="Prénom" name="surname">
+                  </div>
+                  <div class="col">
+                    <input type="text" class="form-control" placeholder="Nom" name="name">
+                  </div>
+                </div>
+                <div class="row">
+                    <div class="col form-group">
+                        <input type="email" class="form-control" placeholder="Adresse e-mail éducation" name="email">
+                        <small class="form-text text-muted">Nous ne partegerons jamais votre email avec quelqu'un d'autre.</small>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col form-group">
+                      <input type="text" class="form-control" placeholder="Promotion" name="promotion">
+                    </div>
+                    <div class="col">
+                      <input type="text" class="form-control" placeholder="Spécialité" name="speciality">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </div> 
+            </form>
+        </div>    
+    
+
+    
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
