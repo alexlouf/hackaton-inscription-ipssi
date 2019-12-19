@@ -81,14 +81,13 @@ function controlEmail(email) {
 };
 
 function controlText(text) {
-    // Ajouter controle texte
-    // Required & minimum 2 caractères
-    // pas de balise HTML du genre <script> pour eviter le XSS 
-    // pas de caractère spéciaux pour eviter le 'OR 1=1#
-    // return true ou flase si c'est bon ou pas
-
-    return true;
+    re = /[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/;
+    if(text.length < 2 || text.length > 25 ||  re.test(text)){
+        return false
+    }
+        return true;
 }
+
 
 function fetchArray(array) {
 
@@ -139,3 +138,5 @@ function editArray(data, array){
     }
 
 }
+
+
