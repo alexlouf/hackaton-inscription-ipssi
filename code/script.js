@@ -120,3 +120,65 @@ function editArray(data, array){
     }
 
 }
+
+
+
+function surligne(field, error){
+    if(error)
+    field.style.backgroundColor = "#fba";
+    else
+    field.style.backgroundColor = "";
+}
+
+function verifSurname(field){
+   if(field.value.length < 2 || field.value.length > 25)
+   {
+      surligne(field, true);
+      return false;
+   }
+   else
+   {
+      surligne(field, false);
+      return true;
+   }
+}
+
+function verifName(field){
+    if(field.value.length < 2 || field.value.length > 25)
+    {
+       surligne(field, true);
+       return false;
+    }
+    else
+    {
+       surligne(field, false);
+       return true;
+    }
+ }
+
+ function verifMail(field)
+{
+   var regex = /^[a-zA-Z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/;
+   if(!regex.test(champ.value))
+   {
+      surligne(champ, true);
+      return false;
+   }
+   else
+   {
+      surligne(champ, false);
+      return true;
+   }
+}
+
+function verifPromoSpe(field){
+    var regex = /^[a-zA-Z0-9._-]$/;
+    if(!regex.test(field.value)){
+        surligne(field, true);
+        return false;
+    }else{
+        surligne(field, false);
+        return true;
+    } 
+        
+}
