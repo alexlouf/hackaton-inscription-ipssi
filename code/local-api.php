@@ -21,7 +21,7 @@ function adduser($conn) {
     $stmt->bindParam(":project", $project);
     $stmt->execute();
     $row = $stmt->fetchAll();
-    if ($row[0]["COUNT(*)"] >  5) {
+    if ($row[0]["COUNT(*)"] >=  5) {
         $res_array["success"] = false;
         $res_array["Message"] = "Trop d'élève ajouté sur le projet !";
         return json_encode($res_array);
