@@ -15,6 +15,7 @@ window.addEventListener("DOMContentLoaded", ()=>{
         return;
     }
 
+
     addstudentButton.onclick = function(e){
         e.preventDefault();
         validateForm(form);
