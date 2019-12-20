@@ -46,8 +46,7 @@ window.addEventListener("DOMContentLoaded", ()=>{
 
         xhr.addEventListener("readystatechange", function() {
         if(this.readyState === 4) {
-            var response = JSON.parse(this.responseText);
-            if(!response.success) {
+            if(!this.responseText.success) {
                 alert("Erreur dans la BDD, veuillez recommencer plus tard !")
             }
         }
