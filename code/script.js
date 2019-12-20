@@ -3,62 +3,22 @@ window.addEventListener("DOMContentLoaded", ()=>{
     
     // retrieving DOM elements necessary for developping
     submitButton = document.getElementById("submit-form");
+    addstudentButton = document.getElementById("addstudent-form");
     form = document.getElementById("form");
     array = document.getElementById("registered-users")
 
     //Adding actions to DOM
     submitButton.onclick = function(e){
-
         e.preventDefault();
-        valid = true;
-        message = "Vérifier votre ";
-        json = {};
+        validateForm(form);
+        emptyForm(false, form);
+        return;
+    }
 
-        for(var i = 0; i < form.length-1; i++){
-            if (form[i].name == "email") {
-                if (!controlEmail(form[i].value)) {
-                    form[i].classList.add("is-invalid");
-                    valid = false;
-                    message += form[i].placeholder;
-                    break;
-                }
-            } else {
-                if (!controlText(form[i].value)) {
-                    form[i].classList.add("is-invalid");
-                    valid = false;
-                    message += form[i].placeholder;
-                    break;
-                }
-            }
-            form[i].classList.remove("is-invalid");
-            json[form[i].name] = form[i].value;
-        }
-
-        if (!valid) {
-            alert(message);
-            return;
-        }
-
-        var data = JSON.stringify(json);
-
-        var xhr = new XMLHttpRequest();
-        xhr.withCredentials = true;
-
-        xhr.addEventListener("readystatechange", function() {
-        if(this.readyState === 4) {
-            var response = JSON.parse(this.responseText);
-            if(!response.success) {
-                alert("Erreur dans la BDD, veuillez recommencer plus tard !")
-            }
-        }
-        });
-
-        xhr.open("POST", "local-api.php");
-        xhr.setRequestHeader("Content-Type", "application/json");
-
-        xhr.send(data);
-
-        fetchArray(array);
+    addstudentButton.onclick = function(e){
+        e.preventDefault();
+        validateForm(form);
+        emptyForm(true, form);
         return;
     }
 
@@ -66,7 +26,7 @@ window.addEventListener("DOMContentLoaded", ()=>{
     fetchArray(array);
     refreshArray = setInterval(() => {
         fetchArray(array);
-    }, 30000);
+    }, 2000);
 
 });
 
@@ -121,6 +81,7 @@ function editArray(data, array){
         thEmail = document.createElement("td");
         thPromotion = document.createElement("td");
         thSpeciality = document.createElement("td");
+        thProject = document.createElement("td");
 
         //Add values to dom elements
         thName.innerHTML = json[i].name;
@@ -128,6 +89,7 @@ function editArray(data, array){
         thEmail.innerHTML = json[i].email;
         thPromotion.innerHTML = json[i].promotion;
         thSpeciality.innerHTML = json[i].speciality
+        thProject.innerHTML = json[i].project
 
         //adding to HTML
         tr.appendChild(thName);
@@ -135,9 +97,72 @@ function editArray(data, array){
         tr.appendChild(thEmail);
         tr.appendChild(thPromotion);
         tr.appendChild(thSpeciality);
+        tr.appendChild(thProject);
         tbody.appendChild(tr);
     }
 
 }
 
+function emptyForm(project, form) {
+    if (project){
+        for(var i = 1; i < form.elements.length-2; i++) {
+            form[i].value = "";
+        }
+        return;
+    }
+    for(var i = 0; i < form.elements.length-2; i++) {
+        form[i].value = "";
+    }
+}
 
+function validateForm(form) {
+    valid = true;
+    message = "Vérifier votre ";
+    json = {};
+
+    for(var i = 0; i < form.length-2; i++){
+        if (form[i].name == "email") {
+            if (!controlEmail(form[i].value)) {
+                form[i].classList.add("is-invalid");
+                valid = false;
+                message += form[i].placeholder;
+                break;
+            }
+        } else {
+            if (!controlText(form[i].value)) {
+                form[i].classList.add("is-invalid");
+                valid = false;
+                message += form[i].placeholder;
+                break;
+            }
+        }
+        form[i].classList.remove("is-invalid");
+        json[form[i].name] = form[i].value;
+    }
+
+    if (!valid) {
+        alert(message);
+        return;
+    }
+
+    var data = JSON.stringify(json);
+
+    var xhr = new XMLHttpRequest();
+    xhr.withCredentials = true;
+
+    xhr.addEventListener("readystatechange", function() {
+    if(this.readyState === 4) {
+        var response = JSON.parse(this.responseText);
+        if(!response.success) {
+            alert(response.Message)
+        }
+    }
+    });
+
+    xhr.open("POST", "local-api.php");
+    xhr.setRequestHeader("Content-Type", "application/json");
+
+    xhr.send(data);
+
+    fetchArray(array);
+}
