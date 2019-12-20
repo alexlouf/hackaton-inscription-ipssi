@@ -15,6 +15,12 @@
         <div class="container rounded-lg bg-light p-3 pl-4 mt-5" style="box-shadow: 0px 0px 40px 30px rgba(0,0,0,0.74);">
             <h1 class="h3">Inscription au hackathon IPSSI</h1>
             <form class="mt-4" id="form">
+              <div class="row">
+                <div class="col form-group">
+                    <label for="project" class="invisible">Projet</label>
+                  <input required type="text" class="form-control" placeholder="Projet" name="project" id="projet">
+                </div>
+              </div>
                 <div class="row">
                   <div class="col form-group">
                       <label for="surname" class="invisible"> Prénom</label>
@@ -34,23 +40,24 @@
                 </div>
                 <div class="row">
                     <div class="col form-group">
-                        <label for="promotion">Promotion</label>
+                        <label for="promotion" class="invisible">Promotion</label>
                       <input required type="text" class="form-control" placeholder="Promotion" name="promotion" id="promotion">
                     </div>
                     <div class="col">
-                        <label for="speciality">Spécialité</label>
+                        <label for="speciality" class="invisible">Spécialité</label>
                       <input required type="text" class="form-control" placeholder="Spécialité" name="speciality" id="speciality">
                     </div>
                 </div>
                 <div class="row">
                     <div class="col">
-                        <button type="submit" class="btn btn-primary" id="submit-form">Submit</button>
+                        <button type="submit" class="btn btn-primary" id="submit-form">Valider</button>
+                        <button type="addstudent" class="btn btn-outline-primary" id="addstudent-form">Insérer un nouvel élève</button>
                     </div>
                 </div> 
             </form>
         </div>
 
-        <div class="container rounded-lg bg-light p-3 pl-4 mt-5" style="box-shadow: 0px 0px 40px 30px rgba(0,0,0,0.74);">
+        <div class="container rounded-lg bg-light p-3 pl-4 mt-5 mb-4" style="box-shadow: 0px 0px 40px 30px rgba(0,0,0,0.74);">
             <h2 class="h3">Liste des élèves inscrits</h2>
             <table class="table table-striped mt-4" id="registered-users">
                 <thead>
@@ -60,6 +67,7 @@
                     <th scope="col">Email</th>
                     <th scope="col">Promotion</th>
                     <th scope="col">Spécialité</th>
+                    <th scope="col">Projet</th>
                   </tr>
                 </thead>
                 <tbody>
